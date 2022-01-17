@@ -7,16 +7,25 @@ function createData(Data,Tname){
 function getAllData(Tname){
     return knex(Tname).select("*");
 };
-function deleteData(id,Tname){
-    return knex(Tname).where("id",id).del();
+async function getData(Tname,nrRows){
+    const maxId = await knex(Tname).select("id").orderBy("id","desc");
+    return knex(Tname).select("*").where("id",'>',maxId.length - nrRows);
+}
+function getLongitudeLatitude(name){
+    return knex("Coords").select(['Latitude' ,'Longitude']).where("Name",'=',name).then(result => result[0]);
 };
-function updateData(id,Data,Tname){
-    return knex(Tname).where("id",id).update(Data);
-};
+
+
+// function deleteData(id,Tname){
+//     return knex(Tname).where("id",id).del();
+// };
+// function updateData(id,Data,Tname){
+//     return knex(Tname).where("id",id).update(Data);
+// };
 
 module.exports = {
     createData,
     getAllData,
-    deleteData,
-    updateData
+    getData,
+    getLongitudeLatitude,
 }
