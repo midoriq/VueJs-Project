@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(cors());
 
-var j = schedule.scheduleJob({hour: 9, minute: 00}, function(){
+var j = schedule.scheduleJob({hour: 9, minute: 05}, function(){
     Wf.forecast(async function(Temperature){
         await db.createData(Temperature,"Weather");
         console.log("added row");
