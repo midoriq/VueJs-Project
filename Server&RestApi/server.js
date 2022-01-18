@@ -1,26 +1,22 @@
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
-const schedule = require('node-schedule');
 
 const db = require("./DB/DataController");
-const Wf = require("./DB/WeatherForecast");
+const Wf = require("./WeatherForecast/WeatherForecast");
+const Coords = require("./WeatherForecast/Coords");
+const Measurment = require("./WeatherForecast/measurments");
 const cors = require('cors');
-  
-const latitude = 52.237049;
-const longitude = 21.017532; 
 
 // Function call
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(cors());
 
-var j = schedule.scheduleJob({hour: 9, minute: 05}, function(){
-    Wf.forecast(async function(Temperature){
-        await db.createData(Temperature,"Weather");
-        console.log("added row");
-    },latitude,longitude)
-});
+//Measurments
+Measurment.createMeasurment(09,00);
+Measurment.measurment(12,00);
+Measurment.measurment(15,00);
 
 //adding city with coordinates to database ( this enable weather check for new city )
 app.post("/AddCoords",async (req,res)=>{
@@ -31,7 +27,7 @@ app.post("/AddCoords",async (req,res)=>{
         res.send("Pomyślnie dodano nowe miasto");
     }else
     {
-        res.send("Byczq takie mastu juz mamy");
+        res.send("Byczq takie miasto juz mamy");
     }
 });
 
@@ -39,7 +35,9 @@ app.post("/AddCoords",async (req,res)=>{
 app.get("/CurrentTemp",async (req,res)=>{
     Wf.forecast(function(Temperature){
         res.status(200).json({Temperature});
-    },latitude,longitude)
+    },
+    Coords.latitude,
+    Coords.longitude)
 });
 //return current temperature in city with given name (if in database)
 app.get("/CurrentTemp/:name",async (req,res)=>{
@@ -52,12 +50,12 @@ app.get("/CurrentTemp/:name",async (req,res)=>{
 
 //return temperature from last 7 days in poland
 app.get("/Weather7",async (req,res)=>{
-    const Data = await db.getData("Weather",7);
+    const Data = await db.getWeather(7);
     res.status(201).json({Data});
 });
 //return temperature from last 30 days in poland
 app.get("/Weather30",async (req,res)=>{
-    const Data = await db.getData("Weather",30);
+    const Data = await db.getWeather(30);
     res.status(201).json({Data});
 });
 
