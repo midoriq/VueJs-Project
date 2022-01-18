@@ -15,7 +15,6 @@ function forecast(callback,latitude, longitude ) {
         obj.MinTemp = Math.round((response.body.main.temp_min - 273.15)*100)/100;
         obj.Pressure = response.body.main.pressure;
         obj.Humidity = response.body.main.humidity;
-        console.log(obj);
         return callback(obj);
     });
     } 
