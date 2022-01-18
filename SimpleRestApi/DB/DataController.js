@@ -8,13 +8,15 @@ function getAllData(Tname){
     return knex(Tname).select("*");
 };
 async function getData(Tname,nrRows){
-    const maxId = await knex(Tname).select("id").orderBy("id","desc");
+    const maxId = await knex(Tname).select("id");
     return knex(Tname).select("*").where("id",'>',maxId.length - nrRows);
 }
 function getLongitudeLatitude(name){
     return knex("Coords").select(['Latitude' ,'Longitude']).where("Name",'=',name).then(result => result[0]);
 };
-
+function selectSpecific(Tname,Rname,Content){
+    return knex(Tname).select(Rname).where(Rname,'=',Content);
+};
 
 // function deleteData(id,Tname){
 //     return knex(Tname).where("id",id).del();
@@ -28,4 +30,5 @@ module.exports = {
     getAllData,
     getData,
     getLongitudeLatitude,
+    selectSpecific
 }
