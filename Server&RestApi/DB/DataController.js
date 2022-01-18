@@ -4,9 +4,6 @@ const knex = require("./knex");
 function createData(Data,Tname){
     return knex(Tname).insert(Data);
 };
-function getAllData(Tname){
-    return knex(Tname).select("*");
-};
 async function getWeather(nrRows){
     const maxId = await knex(Tname).select("id");
     return knex(Tname).select("*").where("id",'>',maxId.length - nrRows);
@@ -33,7 +30,7 @@ async function updateWeatherMeasurment(Data){
     obj.Humidity = Math.round((parseFloat(Data.Humidity) + parseFloat(lastMeasurment.Humidity*Mnr)) / (Mnr+1) *100)/100;
     obj.nrMeasurments = (Mnr+1);
 
-    console.log(obj);
+    //console.log(obj);
     return knex("Weather").where("id",'=',maxId.length).update(obj);
 };
 
