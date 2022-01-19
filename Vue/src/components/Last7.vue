@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     fetchLast7Temp() {
-      this.$http.get("http://localhost:8080/Last7").then(function(response) {
+      this.$http.get("http://localhost:8080/Weather7").then(function(response) {
         this.last7Temp = response.body.Data;
         console.log(response.body);
       });
