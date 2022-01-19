@@ -31,6 +31,15 @@ app.post("/AddCoords",async (req,res)=>{
     }
 });
 
+//return current temperature on given coords
+app.get("/WeatherFromCoords",async (req,res)=>{
+    Wf.forecast(function(Temperature){
+        res.status(200).json({Temperature})
+    },
+    req.body.latitude,
+    req.body.longitude)
+});
+
 //return current temperature in warsaw
 app.get("/CurrentTemp",async (req,res)=>{
     Wf.forecast(function(Temperature){
