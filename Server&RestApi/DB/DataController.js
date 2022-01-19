@@ -5,8 +5,8 @@ function createData(Data,Tname){
     return knex(Tname).insert(Data);
 };
 async function getWeather(nrRows){
-    const maxId = await knex(Tname).select("id");
-    return knex(Tname).select("*").where("id",'>',maxId.length - nrRows);
+    const maxId = await knex("Weather").select("id");
+    return knex("Weather").select("*").where("id",'>',maxId.length - nrRows);
 }
 function getLongitudeLatitude(name){
     return knex("Coords").select(['Latitude' ,'Longitude']).where("Name",'=',name).then(result => result[0]);
@@ -36,7 +36,6 @@ async function updateWeatherMeasurment(Data){
 
 module.exports = {
     createData,
-    getAllData,
     getWeather,
     getLongitudeLatitude,
     selectSpecific,
