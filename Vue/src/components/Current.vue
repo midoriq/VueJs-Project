@@ -36,7 +36,6 @@ export default {
         .get("http://localhost:8080/CurrentTemp")
         .then(function(response) {
           this.currents = response.body;
-          console.log(response.body);
         });
     }
   },

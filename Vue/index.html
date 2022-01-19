@@ -12,6 +12,28 @@
     />
   </head>
   <body>
+    <!--
+    <script>
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const lati = position.coords.latitude;
+          const long = position.coords.longitude;
+        });
+
+        const data = {lati, long};
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }
+        fetch('/coords', options).then(response =>{
+          
+        });
+      }
+    </script>
+    -->
     <div id="app"></div>
     <!-- built files will be auto injected -->
 

@@ -6,6 +6,7 @@ import VueRouter from "vue-router";
 import vueResource from "vue-resource";
 import Current from "./components/Current";
 import Last7 from "./components/Last7";
+import UserLocation from "./components/UserLocation";
 
 Vue.use(vueResource);
 Vue.use(VueRouter);
@@ -15,7 +16,8 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     { path: "/", component: Current },
-    { path: "/Last7", component: Last7 }
+    { path: "/Last7", component: Last7 },
+    { path: "/Coords", component: UserLocation }
   ]
 });
 
