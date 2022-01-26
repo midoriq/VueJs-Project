@@ -1,32 +1,34 @@
 <template>
-    <div class="cities">
-        <div class="container">
-            <h2>List of cities</h2>
-            <router-link to="/add">
-                <button type="button" class="add">
-                    <span class="button_text">Add City</span>
-                    <span class="button_icon"
-                        ><img src="../assets/add.svg" alt=""
-                    /></span>
-                </button>
-            </router-link>
-        </div>
+    <div class="container">
+        <div class="cities">
+            <div class="content">
+                <h2>List of cities</h2>
+                <router-link to="/add">
+                    <button type="button" class="add">
+                        <span class="button_text">Add City</span>
+                        <span class="button_icon"
+                            ><img src="../assets/add.svg" alt=""
+                        /></span>
+                    </button>
+                </router-link>
+            </div>
 
-        <ul>
-            <li
-                v-for="item in cities"
-                :key="item.Name"
-                class="cities_name"
-                v-on:click="ShowDetails"
-                @click="this.cityName = item.Name"
-            >
-                {{ item.Name }}
-            </li>
-        </ul>
-    </div>
-    <div class="cities_details" v-if="showDetail">
-        <CityDetails :cityData="cityName" />
-        <p class="off" v-on:click="ShowDetails">X</p>
+            <ul>
+                <li
+                    v-for="item in cities"
+                    :key="item.Name"
+                    class="cities_name"
+                    v-on:click="ShowDetails"
+                    @click="this.cityName = item.Name"
+                >
+                    {{ item.Name }}
+                </li>
+            </ul>
+        </div>
+        <div class="cities_details" v-if="showDetail">
+            <CityDetails :cityData="cityName" />
+            <p class="off" v-on:click="ShowDetails">X</p>
+        </div>
     </div>
 </template>
 
@@ -67,7 +69,7 @@ export default {
 <style scoped>
 .cities {
     width: 60%;
-    margin: 50px auto;
+    margin: 50px auto 0 auto;
 }
 
 ul {
@@ -93,7 +95,7 @@ ul li:hover {
     color: #acdeaa;
 }
 
-.container {
+.content {
     display: flex;
     align-items: center;
 }
@@ -105,6 +107,10 @@ h2 {
     font-size: 40px;
 
     margin-right: 40px;
+}
+
+a {
+    text-decoration: none;
 }
 
 .add {

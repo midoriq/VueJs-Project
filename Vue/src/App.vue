@@ -24,8 +24,12 @@ export default {
     box-sizing: border-box;
 }
 
-.app {
+#app {
     min-height: 100vh;
     position: relative;
+}
+
+.container {
+    padding-bottom: 85px;
 }
 </style>
