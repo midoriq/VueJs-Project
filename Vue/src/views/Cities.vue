@@ -1,33 +1,40 @@
 <template>
     <div class="container">
-        <div class="cities">
-            <div class="content">
-                <h2>List of cities</h2>
-                <router-link to="/add">
-                    <button type="button" class="add">
-                        <span class="button_text">Add City</span>
-                        <span class="button_icon"
-                            ><img src="../assets/add.svg" alt=""
-                        /></span>
-                    </button>
-                </router-link>
-            </div>
+        <div id="blur">
+            <div class="cities">
+                <div class="content">
+                    <h2>List of cities</h2>
+                    <router-link to="/add">
+                        <button type="button" class="add">
+                            <span class="button_text">Add City</span>
+                            <span class="button_icon"
+                                ><img src="../assets/add.svg" alt=""
+                            /></span>
+                        </button>
+                    </router-link>
+                </div>
 
-            <ul>
-                <li
-                    v-for="item in cities"
-                    :key="item.Name"
-                    class="cities_name"
-                    v-on:click="ShowDetails"
-                    @click="this.cityName = item.Name"
-                >
-                    {{ item.Name }}
-                </li>
-            </ul>
+                <ul>
+                    <li
+                        v-for="item in cities"
+                        :key="item.Name"
+                        class="cities_name"
+                        v-on:click="ShowDetails"
+                        @click="this.cityName = item.Name"
+                    >
+                        {{ item.Name }}
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="cities_details" v-if="showDetail">
             <CityDetails :cityData="cityName" />
-            <p class="off" v-on:click="ShowDetails">X</p>
+            <img
+                src="../assets/close.svg"
+                alt="closes"
+                class="off"
+                v-on:click="ShowDetails"
+            />
         </div>
     </div>
 </template>
@@ -49,10 +56,13 @@ export default {
     },
     methods: {
         ShowDetails() {
+            var blur = document.getElementById("blur");
             if (this.showDetail) {
                 this.showDetail = false;
+                blur.classList.remove("active");
             } else {
                 this.showDetail = true;
+                blur.classList.toggle("active");
             }
         },
     },
@@ -85,7 +95,7 @@ ul li {
     list-style-type: none;
 
     margin: 10px 0;
-    width: 20%;
+    width: 12%;
     cursor: pointer;
 
     transition: ease all 0.4s;
@@ -153,18 +163,31 @@ a {
     height: 20px;
 }
 
+#blur.active {
+    filter: blur(2px);
+    pointer-events: none;
+}
+#blur.off {
+    filter: none;
+    pointer-events: visible;
+}
+
 .cities_details {
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-}
 
+    filter: blur(0px);
+    pointer-events: visible;
+}
 .off {
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 20px;
-    right: 20px;
+    top: 30px;
+    right: 0px;
+
+    height: 25px;
 
     cursor: pointer;
 }

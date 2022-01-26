@@ -1,11 +1,33 @@
 <template>
     <div class="details">
         <h1>Details {{ this.cityData }}</h1>
-        <div v-for="item in cityDetails" :key="item.Temp">
-            <p>Temperature: {{ item.Temp }}</p>
-            <p>Feels like: {{ item.Feels_like }}</p>
-            <p>Pressure: {{ item.Pressure }}</p>
-        </div>
+
+        <table v-for="item in cityDetails" :key="item.Temp">
+            <tr>
+                <td>Temperature</td>
+                <td>{{ item.Temp }}</td>
+            </tr>
+            <tr>
+                <td>Feels like</td>
+                <td>{{ item.Feels_like }}</td>
+            </tr>
+            <tr>
+                <td>Pressure</td>
+                <td>{{ item.Pressure }}</td>
+            </tr>
+            <tr>
+                <td>Humidity</td>
+                <td>{{ item.Humidity }}</td>
+            </tr>
+            <tr>
+                <td>Max Temperature</td>
+                <td>{{ item.MaxTemp }}</td>
+            </tr>
+            <tr>
+                <td>Min Temperature</td>
+                <td>{{ item.MaxTemp }}</td>
+            </tr>
+        </table>
     </div>
 </template>
 
@@ -29,8 +51,18 @@ export default {
 
 <style scoped>
 .details {
-    height: 60vh;
-    width: 50vw;
-    background-color: #8fbbaf;
+    padding: 40px 30px;
+    background-color: #8aae92;
+}
+
+h1 {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 30px;
+    margin: 0 30px 15px 0;
+}
+
+td {
+    padding: 8px 20px;
 }
 </style>
