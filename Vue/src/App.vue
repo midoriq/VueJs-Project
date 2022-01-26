@@ -1,12 +1,31 @@
 <template>
-  <div id="app"></div>
+    <Navigation />
+    <router-view />
+    <Footer />
 </template>
 
 <script>
+import Footer from "./components/Footer.vue";
+import Navigation from "./components/Navigation.vue";
+
 export default {
-  name: "App",
-  components: {}
+    name: "App",
+    components: {
+        Navigation,
+        Footer,
+    },
 };
 </script>
 
-<style></style>
+<style>
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.app {
+    min-height: 100vh;
+    position: relative;
+}
+</style>
