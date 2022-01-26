@@ -60,11 +60,8 @@ export default {
                 Longitude: this.city.longitude,
             };
             console.log(newCity);
-            this.$http.post("http://localhost:8080/AddCoords", newCity);
-
-            //Gdynia
-            //	54.5188898
-            // 18.5305409
+            this.$http.post("http://34.116.152.0/AddCoords", newCity)
+               .then(this.$router.push({ path: "/cities"}));
           }
 
         },
