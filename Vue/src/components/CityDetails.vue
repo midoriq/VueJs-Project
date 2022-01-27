@@ -55,14 +55,14 @@ export default {
     background-color: #8aae92;
 }
 
-h1 {
+.details h1 {
     font-family: Montserrat;
     font-weight: 700;
     font-size: 30px;
     margin: 0 30px 15px 0;
 }
 
-td {
+.details td {
     padding: 8px 20px;
 }
 </style>
